@@ -6,6 +6,7 @@ import caronImage from '../assets/images/caron.png';
 import soundFile from '../assets/sounds/crayon.m4a'; // Make sure the path to your sound file is correct
 
 const ThreeSphere = (props) => {
+  const { onBlobClick } = props; // Destructure the onBlobClick prop
   const canvasRef = useRef(null);
   const sound = new Audio(soundFile); // Initialize audio
 
@@ -80,11 +81,13 @@ const ThreeSphere = (props) => {
       if (intersects.length > 0) {
         for (let i = 0; i < intersects.length; i++) {
           const clickedObject = intersects[i].object;
-          console.log("Checking object test:", clickedObject); 
+
           if (clickedObject === cube) {
-            console.log("Cube clicked!"); 
-            sound.play().catch(error => console.log("Playback error:", error)); 
-            break;  
+            sound.play().catch(error => console.log("Playback error:", error));
+            break;
+          } else if (clickedObject === sphere) { // Sphere clicked
+            onBlobClick(); // Call the function to show Linktree
+            break;
           }
         }
       }
