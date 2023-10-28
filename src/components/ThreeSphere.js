@@ -122,7 +122,7 @@ const ThreeSphere = (props) => {
     return () => {
       window.removeEventListener('click', onClick);
     };
-  }, [props]);
+  }, [onBlobClick, props, sound]);
 
   return <div ref={canvasRef}></div>;
 };
