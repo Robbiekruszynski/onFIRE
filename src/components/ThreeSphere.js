@@ -31,7 +31,7 @@ const ThreeSphere = (props) => {
 
         void main() {
           vUv = position;
-          vec3 newPosition = position + normal * sin(time + position.x * 3.0) * 0.1;
+          vec3 newPosition = position + normal * sin(time + position.x * 3000.0) * 0.1;
           gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
         }
       `,
