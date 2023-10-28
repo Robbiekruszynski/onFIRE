@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Vector2, Raycaster } from 'three';
 import caronImage from '../assets/images/caron.png';
-import sound from '../assets/sounds/crayon.m4a'
+// import sound from '../assets/sounds/crayon.m4a'
 
 const ThreeSphere = (props) => {
   const canvasRef = useRef(null);
