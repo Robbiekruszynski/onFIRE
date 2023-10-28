@@ -26,23 +26,28 @@ const ThreeSphere = (props) => {
       uniforms: {
         time: { value: 0.0 }
       },
-      vertexShader: `
-        varying vec3 vUv;
-        uniform float time;
+     vertexShader: `
+  varying vec3 vUv;
+  uniform float time;
 
-        void main() {
-          vUv = position;
-          vec3 newPosition = position + normal * sin(time + position.x * 3000.0) * 0.1;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
-        }
-      `,
-      fragmentShader: `
-        varying vec3 vUv;
+  void main() {
+    vUv = position;
+    vec3 newPosition = position + normal * sin(time + position.x * 30.0) * cos(time + position.y * 20.0) * 0.3;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+  }
+`,
+fragmentShader: `
+  varying vec3 vUv;
+  uniform float time;
 
-        void main() {
-          gl_FragColor = vec4(vUv.z + 0.5, vUv.x + 0.5, vUv.y + 0.5, 1.0);
-        }
-      `,
+  void main() {
+    float r = sin(vUv.x * 6.0 + time * 2.0) * 0.5 + 0.5;
+    float g = cos(vUv.y * 6.0 + time * 3.0 + 2.0) * 0.5 + 0.5;
+    float b = sin(vUv.z * 6.0 + time * 4.0 + 4.0) * 0.5 + 0.5;
+    gl_FragColor = vec4(r, g, b, 1.0);
+  }
+`,
+
     });
 
     const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
