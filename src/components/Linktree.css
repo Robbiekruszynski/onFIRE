@@ -1,7 +1,7 @@
 
 .angled-button {
-    background: black;  /* Button color */
-    color: white;  /* Text color */
+    background: black !important;  
+    color: white !important;  
     padding: 12px 24px;
     text-align: center;
     cursor: pointer;
@@ -11,10 +11,12 @@
   }
   
   .angled-button:hover {
-    background: red;  /* Hover color */
-    color: white;  /* Hover text color */
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);  /* Black drop shadow on hover */
+    background: red !important;  
+    color: white !important;  
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3) !important;  
   }
   
+
+
 
   

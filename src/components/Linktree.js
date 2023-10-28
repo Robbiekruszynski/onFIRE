@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Button, Container, Typography, Avatar } from '@mui/material';
 import { Box } from '@mui/system';
 import caronImage from '../assets/images/caron.png';
-import backgroundImage from '../assets/images/m2.png';  
+import backgroundImage from '../assets/images/m3.png';  
 import './Linktree.css';
 
 const Linktree = () => {
