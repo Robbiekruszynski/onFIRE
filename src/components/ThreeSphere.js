@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Vector2, Raycaster } from 'three';
 import caronImage from '../assets/images/caron.png';
-import soundFile from '../assets/sounds/crayon.m4a';  // Make sure the path to your sound file is correct
+import soundFile from '../assets/sounds/crayon.m4a'; // Make sure the path to your sound file is correct
 
 const ThreeSphere = (props) => {
   const canvasRef = useRef(null);
@@ -28,28 +28,31 @@ const ThreeSphere = (props) => {
         time: { value: 0.0 }
       },
       vertexShader: `
-        varying vec3 vUv;
-        uniform float time;
-
-        void main() {
-          vUv = position;
-          vec3 newPosition = position + normal * sin(time + position.x * 30.0) * cos(time + position.y * 20.0) * 0.3;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
-        }
+      varying vec3 vUv;
+      uniform float time;
+      
+      void main() {
+        vUv = position;
+        float pulseFactor = sin(time + length(position)) * 12.2; // For a pulsating effect
+        vec3 newPosition = position + normal * (sin(time * 2.0 + position.x * 20.0) * cos(time * 2.0 + position.y * 15.0) + pulseFactor);
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+      }
+      
       `,
       fragmentShader: `
-        varying vec3 vUv;
-        uniform float time;
-
-        void main() {
-          float r = sin(vUv.x * 6.0 + time * 2.0) * 0.5 + 0.5;
-          float g = cos(vUv.y * 6.0 + time * 3.0 + 2.0) * 0.5 + 0.5;
-          float b = sin(vUv.z * 6.0 + time * 4.0 + 4.0) * 0.5 + 0.5;
-          gl_FragColor = vec4(r, g, b, 1.0);
-        }
+      varying vec3 vUv;
+      uniform float time;
+      
+      void main() {
+        float r = sin(vUv.x * 10.0 + time * 3.0) * 0.5 + 0.5;
+        float g = cos(vUv.y * 10.0 + time * 4.0 + 3.0) * 0.5 + 0.5;
+        float b = sin(vUv.z * 10.0 + time * 5.0 + 6.0) * 0.5 + 0.5;
+        gl_FragColor = vec4(r, g, b, 1.0);
+      }
+      
       `,
     });
-
+//trigonometric functions to generate colors between 0.5 and 1 for red, green, and blue channels. To use a different gradient, you could add offsets or multipliers to these channels.
     const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
     const sphere = new THREE.Mesh(sphereGeometry, material);
     scene.add(sphere);
@@ -60,28 +63,34 @@ const ThreeSphere = (props) => {
     const cubeGeometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
     const cubeMaterial = new THREE.MeshBasicMaterial({ map: cubeTexture });
     const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    cube.visible = false;
+    cube.visible = true; 
     scene.add(cube);
 
-    camera.position.z = 3;
+    camera.position.z = 20;
 
     const onClick = (event) => {
       event.preventDefault();
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
       raycaster.setFromCamera(mouse, camera);
+    
       const intersects = raycaster.intersectObjects([sphere, cube]);
-
+      console.log("Intersected object test:", intersects); 
+    
       if (intersects.length > 0) {
-        const clickedObject = intersects[0].object;
-        if (clickedObject === sphere && props.onBlobClick) {
-          props.onBlobClick();
-        } else if (clickedObject === cube) {
-          sound.play();
+        for (let i = 0; i < intersects.length; i++) {
+          const clickedObject = intersects[i].object;
+          console.log("Checking object test:", clickedObject); 
+          if (clickedObject === cube) {
+            console.log("Cube clicked!"); 
+            sound.play().catch(error => console.log("Playback error:", error)); 
+            break;  
+          }
         }
       }
     };
-
+    
+  
     window.addEventListener('click', onClick);
 
     const animate = () => {
