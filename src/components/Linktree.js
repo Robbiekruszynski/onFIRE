@@ -1,41 +1,58 @@
-import React from 'react';
-import { Button, Container, Typography } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Button, Container, Typography, Avatar } from '@mui/material';
+import { Box } from '@mui/system';
+import caronImage from '../assets/images/caron.png';
+import './Linktree.css';
 
 const Linktree = () => {
-  const links = [
-    { title: 'My Portfolio', url: 'https://www.my-portfolio.com' },
-    { title: 'GitHub', url: 'https://github.com/username' },
-    { title: 'LinkedIn', url: 'https://www.linkedin.com/in/username/' },
-    // Add more links as needed
-  ];
+  useEffect(() => {
+    document.body.style.backgroundColor = 'black';
+    return () => {
+      document.body.style.backgroundColor = null;
+    };
+  }, []);
 
-  const angledButtonStyle = {
-    margin: '10px 0',
-    clipPath: 'polygon(0% 20%, 100% 0%, 100% 80%, 0% 100%)',
-    WebkitClipPath: 'polygon(0% 20%, 100% 0%, 100% 80%, 0% 100%)', // For Safari
-    width: '100%', // To ensure the wrapper takes the full width
-  };
+  const links = [
+    { title: 'Telegram', url: 'https://t.me/caronfire', background: 'linear-gradient(45deg, #009688 30%, #4db6ac 90%)' },
+    { title: 'Twitter', url: 'https://twitter.com/caronfiree', background: 'linear-gradient(45deg, #009688 30%, #4db6ac 90%)' },
+   { title: 'GitHub', url: 'https://github.com/CaronSch', background: 'linear-gradient(45deg, #009688 30%, #4db6ac 90%)' },
+    { title: 'LinkedIn', url: 'https://www.linkedin.com/in/caronschaller/', background: 'linear-gradient(45deg, #009688 30%, #4db6ac 90%)' },
+  ];
 
   return (
     <Container>
-      <Typography variant="h4" component="h1" gutterBottom>
-        My Links
-      </Typography>
-      {links.map((link, index) => (
-        <span key={index} style={angledButtonStyle}>
-          <Button
-            variant="contained"
-            color="primary"
-            fullWidth
-            onClick={() => window.open(link.url, '_blank')}
-          >
-            {link.title}
-          </Button>
-        </span>
-      ))}
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        minHeight="100vh"
+        style={{ color: 'white' }}
+      >
+        <Avatar alt="Profile Photo" src={caronImage} />
+        <Typography variant="h4" component="h1" gutterBottom>
+          CarOnFire
+        </Typography>
+        {links.map((link, index) => (
+          <Box mt={3} width={1 / 2} key={index}>
+            <Button
+              className="gradient-button"  // Add this line
+              variant="contained"
+              color="primary"
+              fullWidth
+              onClick={() => window.open(link.url, '_blank')}
+            >
+              {link.title}
+            </Button>
+          </Box>
+        ))}
+      </Box>
     </Container>
   );
 };
 
 export default Linktree;
+
+
+
 
