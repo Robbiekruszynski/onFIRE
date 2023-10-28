@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Linktree from './components/Linktree';
 import ThreeSphere from './components/ThreeSphere';
 
 function App() {
+  const [showLinktree, setShowLinktree] = useState(false);
+
+  const handleBlobClick = () => {
+    setShowLinktree(true);
+  };
+
   return (
     <div>
-      <Linktree />
-      <ThreeSphere />
+      {showLinktree ? <Linktree /> : <ThreeSphere onBlobClick={handleBlobClick} />}
     </div>
   );
 }
 
 export default App;
+
