@@ -3,12 +3,12 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Vector2, Raycaster } from 'three';
 import caronImage from '../assets/images/caron.png';
-import soundFile from '../assets/sounds/crayon.m4a'; // Make sure the path to your sound file is correct
+// import soundFile from '../assets/sounds/crayon.m4a'; // Make sure the path to your sound file is correct
 
 const ThreeSphere = (props) => {
   const { onBlobClick } = props; // Destructure the onBlobClick prop
   const canvasRef = useRef(null);
-  const sound = new Audio(soundFile); // Initialize audio
+  // const sound = new Audio(soundFile); // Initialize audio
 
   useEffect(() => {
     let time = 0;
@@ -83,7 +83,7 @@ const ThreeSphere = (props) => {
           const clickedObject = intersects[i].object;
 
           if (clickedObject === cube) {
-            sound.play().catch(error => console.log("Playback error:", error));
+            // sound.play().catch(error => console.log("Playback error:", error));
             break;
           } else if (clickedObject === sphere) { // Sphere clicked
             onBlobClick(); // Call the function to show Linktree
@@ -122,7 +122,7 @@ const ThreeSphere = (props) => {
     return () => {
       window.removeEventListener('click', onClick);
     };
-  }, [onBlobClick, props, sound]);
+  }, [onBlobClick, props]);
 
   return <div ref={canvasRef}></div>;
 };
