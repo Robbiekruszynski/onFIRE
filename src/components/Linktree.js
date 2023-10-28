@@ -6,22 +6,22 @@ import backgroundImage from '../assets/images/m3.png';
 import './Linktree.css';
 
 const Linktree = () => {
-  useEffect(() => {
-    document.body.style.backgroundImage = `url(${backgroundImage})`;
-    document.body.style.backgroundSize = 'cover';
-    document.body.style.backgroundPosition = 'center';
-    document.body.style.margin = 0;
-    document.body.style.height = '100vh';
-    document.body.style.width = '100%';
-    return () => {
-      document.body.style.backgroundImage = null;
-      document.body.style.backgroundSize = null;
-      document.body.style.backgroundPosition = null;
-      document.body.style.margin = null;
-      document.body.style.height = null;
-      document.body.style.width = null;
-    };
-  }, []);
+    useEffect(() => {
+      document.body.style.background = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`;
+      document.body.style.backgroundSize = 'cover';
+      document.body.style.backgroundPosition = 'center';
+      document.body.style.margin = 0;
+      document.body.style.height = '100vh';
+      document.body.style.width = '100%';
+      return () => {
+        document.body.style.background = null;
+        document.body.style.backgroundSize = null;
+        document.body.style.backgroundPosition = null;
+        document.body.style.margin = null;
+        document.body.style.height = null;
+        document.body.style.width = null;
+      };
+    }, []);
 
   const links = [
     { title: 'Telegram', url: 'https://t.me/caronfire' },
@@ -41,13 +41,15 @@ const Linktree = () => {
         minWidth="100vw"
         style={{ color: 'white' }}
       >
-        <Avatar 
-          alt="Profile Photo" 
-          src={caronImage}
-          sx={{ width: '120px', height: '120px', marginBottom: '20px' }}  
-        />
-        <Typography variant="h4" component="h1" gutterBottom color="black">
-          CarOnFire
+       <Avatar 
+  className="glowing-avatar"
+  alt="Profile Photo" 
+  src={caronImage}
+  sx={{ width: '120px', height: '120px', marginBottom: '20px' }}  
+/>
+
+        <Typography variant="h4" component="h1" gutterBottom color="white">
+          CaronFire
         </Typography>
         {links.map((link, index) => (
           <Box mt={3} width={1 / 3} key={index}>
