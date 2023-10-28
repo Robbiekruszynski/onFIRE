@@ -7,16 +7,10 @@ import './Linktree.css';
 
 const Linktree = () => {
     useEffect(() => {
-      document.body.style.background = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`;
-      document.body.style.backgroundSize = 'cover';
-      document.body.style.backgroundPosition = 'center';
       document.body.style.margin = 0;
       document.body.style.height = '100vh';
       document.body.style.width = '100%';
       return () => {
-        document.body.style.background = null;
-        document.body.style.backgroundSize = null;
-        document.body.style.backgroundPosition = null;
         document.body.style.margin = null;
         document.body.style.height = null;
         document.body.style.width = null;
@@ -31,41 +25,46 @@ const Linktree = () => {
   ];
 
   return (
-    <Container>
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        minHeight="100vh"
-        minWidth="100vw"
-        style={{ color: 'white' }}
-      >
-       <Avatar 
-  className="glowing-avatar"
-  alt="Profile Photo" 
-  src={caronImage}
-  sx={{ width: '120px', height: '120px', marginBottom: '20px' }}  
-/>
-
-        <Typography variant="h4" component="h1" gutterBottom color="white">
-          CaronFire
-        </Typography>
-        {links.map((link, index) => (
-          <Box mt={3} width={1 / 3} key={index}>
-            <Button
-              className="angled-button"
-              variant="contained"
-              fullWidth
-              onClick={() => window.open(link.url, '_blank')}
-            >
-              {link.title}
-            </Button>
-          </Box>
-        ))}
-      </Box>
-    </Container>
+    <>
+      <div className="blurred-background"></div>
+      <Container>
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          minHeight="100vh"
+          minWidth="100vw"
+          style={{ color: 'white', position: 'relative', zIndex: 1 }}
+        >
+          <Avatar 
+            className="glowing-avatar"
+            alt="Profile Photo" 
+            src={caronImage}
+            sx={{ width: '120px', height: '120px', marginBottom: '20px' }}  
+          />
+          {/* <Typography variant="h4" component="h1" gutterBottom color="white">
+            CaronFire
+          </Typography> */}
+          {links.map((link, index) => (
+            <Box mt={3} width={1 / 3} key={index}>
+              <Button
+                className="angled-button"
+                variant="contained"
+                fullWidth
+                onClick={() => window.open(link.url, '_blank')}
+              >
+                {link.title}
+              </Button>
+            </Box>
+          ))}
+        </Box>
+      </Container>
+    </>
   );
 };
 
 export default Linktree;
+
+
+
