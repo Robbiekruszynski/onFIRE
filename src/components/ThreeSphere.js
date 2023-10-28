@@ -18,10 +18,30 @@ const ThreeSphere = () => {
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableZoom = true;
 
+    // Create custom shader material for gradient
+    const material = new THREE.ShaderMaterial({
+      vertexShader: `
+        varying vec3 vUv; 
+
+        void main() {
+          vUv = position; 
+
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        varying vec3 vUv;
+
+        void main() {
+          gl_FragColor = vec4(vUv.z + 0.5, vUv.x + 0.5, vUv.y + 0.5, 1.0);
+        }
+      `,
+    });
+
     // Create sphere
     const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
-    const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+
+    const sphere = new THREE.Mesh(sphereGeometry, material);
     scene.add(sphere);
 
     // Create cube
@@ -57,5 +77,6 @@ const ThreeSphere = () => {
 };
 
 export default ThreeSphere;
+
 
 
