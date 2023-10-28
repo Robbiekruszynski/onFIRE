@@ -1,42 +1,7 @@
 
-  .gradient-button {
-    background: linear-gradient(45deg, #009688 30%, #4db6ac 90%);
-    border: 0;
-    border-radius: 3px;
-    color: white;
-    transition: all 0.3s ease; /* Add transition */
-  }
-  
-  /* Add this new rule */
-  .gradient-button:hover {
-    transform: scale(1.1); /* Scale up the button */
-  }
-  
-  
-  @keyframes gradient-animation {
-    0% {
-      background-position: 0% 0%;
-    }
-    25% {
-        background-position: 25% 0%;
-      }
-      50% {
-        background-position: 50% 0%;
-      }
-      75% {
-        background-position: 75% 0%;
-      }
-    100% {
-      background-position: 100% 0%;
-    }
-  }
-
-
-/* Linktree.css */
-
 .angled-button {
-    background: linear-gradient(45deg, #009688 30%, #4db6ac 90%);  /* your color */
-    color: white;
+    background: black;  /* Button color */
+    color: white;  /* Text color */
     padding: 12px 24px;
     text-align: center;
     cursor: pointer;
@@ -46,7 +11,10 @@
   }
   
   .angled-button:hover {
-    background: linear-gradient(45deg, #007766 30%, #006655 90%);  /* your hover color */
-    box-shadow: 0px 10px 20px rgba(0, 10, 0, 10.3);  /* Drop shadow appears below the button on hover */
+    background: red;  /* Hover color */
+    color: white;  /* Hover text color */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);  /* Black drop shadow on hover */
   }
+  
+
   
