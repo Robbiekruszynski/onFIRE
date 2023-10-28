@@ -30,7 +30,9 @@
       background-position: 100% 0%;
     }
   }
-  
+
+
+/* Linktree.css */
 
 .angled-button {
     background: linear-gradient(45deg, #009688 30%, #4db6ac 90%);  /* your color */
@@ -39,13 +41,12 @@
     text-align: center;
     cursor: pointer;
     border: none;
-    clip-path: polygon(0 0, 100% 0%, 90% 100%, 0 100%);  /* 45-degree slant */
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);  /* 45-degree angle from the top left and from the bottom right */
     transition: all 0.3s ease;
   }
   
   .angled-button:hover {
     background: linear-gradient(45deg, #007766 30%, #006655 90%);  /* your hover color */
+    box-shadow: 0px 10px 20px rgba(0, 10, 0, 10.3);  /* Drop shadow appears below the button on hover */
   }
-  
-  
   
