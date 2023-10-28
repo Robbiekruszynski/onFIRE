@@ -1,14 +1,17 @@
-.gradient-button {
-    background: linear-gradient(270deg, grey, teal);
-    background-size: 200% 100%;
-    transition: all 0.4s ease;
-    animation: gradient-animation 3s infinite linear;
+
+  .gradient-button {
+    background: linear-gradient(45deg, #009688 30%, #4db6ac 90%);
+    border: 0;
+    border-radius: 3px;
+    color: white;
+    transition: all 0.3s ease; /* Add transition */
   }
   
+  /* Add this new rule */
   .gradient-button:hover {
-    background-position: 200% 0;
-    animation: none;
+    transform: scale(1.1); /* Scale up the button */
   }
+  
   
   @keyframes gradient-animation {
     0% {
@@ -24,8 +27,25 @@
         background-position: 75% 0%;
       }
     100% {
-      background-position: 200% 0%;
+      background-position: 100% 0%;
     }
+  }
+  
+
+
+.angled-button {
+    background-color: #009688; /* your color */
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+    clip-path: polygon(10% 0%, 100% 0, 100% 100%, 0% 100%, 0% 10%);
+  }
+  
+  .angled-button:hover {
+    background-color: #007766; /* your hover color */
   }
   
   

@@ -13,10 +13,11 @@ const Linktree = () => {
   }, []);
 
   const links = [
-    { title: 'Telegram', url: 'https://t.me/caronfire', background: 'linear-gradient(45deg, #009688 30%, #4db6ac 90%)' },
-    { title: 'Twitter', url: 'https://twitter.com/caronfiree', background: 'linear-gradient(45deg, #009688 30%, #4db6ac 90%)' },
-   { title: 'GitHub', url: 'https://github.com/CaronSch', background: 'linear-gradient(45deg, #009688 30%, #4db6ac 90%)' },
-    { title: 'LinkedIn', url: 'https://www.linkedin.com/in/caronschaller/', background: 'linear-gradient(45deg, #009688 30%, #4db6ac 90%)' },
+   
+        { title: 'Telegram', url: 'https://t.me/caronfire', background: 'linear-gradient(45deg, #009688 30%, #4db6ac 90%)' },
+        { title: 'Twitter', url: 'https://twitter.com/caronfiree', background: 'linear-gradient(45deg, #009688 30%, #4db6ac 90%)' },
+       { title: 'GitHub', url: 'https://github.com/CaronSch', background: 'linear-gradient(45deg, #009688 30%, #4db6ac 90%)' },
+        { title: 'LinkedIn', url: 'https://www.linkedin.com/in/caronschaller/', background: 'linear-gradient(45deg, #009688 30%, #4db6ac 90%)' },
   ];
 
   return (
@@ -29,19 +30,24 @@ const Linktree = () => {
         minHeight="100vh"
         style={{ color: 'white' }}
       >
-        <Avatar alt="Profile Photo" src={caronImage} />
+        <Avatar 
+          alt="Profile Photo" 
+          src={caronImage}
+          sx={{ width: '120px', height: '120px' }} // Increase the size by 50%
+        />
         <Typography variant="h4" component="h1" gutterBottom>
           CarOnFire
         </Typography>
         {links.map((link, index) => (
-          <Box mt={3} width={1 / 2} key={index}>
-            <Button
-              className="gradient-button"  // Add this line
-              variant="contained"
-              color="primary"
-              fullWidth
-              onClick={() => window.open(link.url, '_blank')}
-            >
+          <Box mt={3} width={1 / 3} key={index}>  {/* Shorten the length of the buttons */}
+          <Button
+  className="gradient-button"  // this line should already be there
+  variant="contained"
+  color="primary"
+  fullWidth
+  onClick={() => window.open(link.url, '_blank')}
+>
+
               {link.title}
             </Button>
           </Box>
@@ -52,6 +58,7 @@ const Linktree = () => {
 };
 
 export default Linktree;
+
 
 
 
