@@ -32,20 +32,20 @@
   }
   
 
-
 .angled-button {
-    background-color: #009688; /* your color */
+    background: linear-gradient(45deg, #009688 30%, #4db6ac 90%);  /* your color */
     color: white;
     padding: 12px 24px;
     text-align: center;
     cursor: pointer;
     border: none;
+    clip-path: polygon(0 0, 100% 0%, 90% 100%, 0 100%);  /* 45-degree slant */
     transition: all 0.3s ease;
-    clip-path: polygon(10% 0%, 100% 0, 100% 100%, 0% 100%, 0% 10%);
   }
   
   .angled-button:hover {
-    background-color: #007766; /* your hover color */
+    background: linear-gradient(45deg, #007766 30%, #006655 90%);  /* your hover color */
   }
+  
   
   

@@ -45,9 +45,9 @@ const ThreeSphere = (props) => {
       uniform float time;
       
       void main() {
-        float r = sin(vUv.x * 10.0 + time * 3.0) * 0.5 + 0.5;
-        float g = cos(vUv.y * 10.0 + time * 4.0 + 3.0) * 0.5 + 0.5;
-        float b = sin(vUv.z * 10.0 + time * 5.0 + 6.0) * 0.5 + 0.5;
+        float r = sin(vUv.x * 2.0 + time * 3.0) * 0.5 + 0.5;
+        float g = cos(vUv.y * 7.0 + time * 4.0 + 3.0) * 0.5 + 0.5;
+        float b = sin(vUv.z * 1.0 + time * 5.0 + 6.0) * 0.5 + 0.5;
         gl_FragColor = vec4(r, g, b, 1.0);
       }
       
