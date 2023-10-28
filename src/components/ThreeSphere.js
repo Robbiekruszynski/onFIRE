@@ -3,10 +3,11 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Vector2, Raycaster } from 'three';
 import caronImage from '../assets/images/caron.png';
-// import sound from '../assets/sounds/crayon.m4a'
+import soundFile from '../assets/sounds/crayon.m4a';  // Make sure the path to your sound file is correct
 
 const ThreeSphere = (props) => {
   const canvasRef = useRef(null);
+  const sound = new Audio(soundFile); // Initialize audio
 
   useEffect(() => {
     let time = 0;
@@ -26,28 +27,27 @@ const ThreeSphere = (props) => {
       uniforms: {
         time: { value: 0.0 }
       },
-     vertexShader: `
-  varying vec3 vUv;
-  uniform float time;
+      vertexShader: `
+        varying vec3 vUv;
+        uniform float time;
 
-  void main() {
-    vUv = position;
-    vec3 newPosition = position + normal * sin(time + position.x * 30.0) * cos(time + position.y * 20.0) * 0.3;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
-  }
-`,
-fragmentShader: `
-  varying vec3 vUv;
-  uniform float time;
+        void main() {
+          vUv = position;
+          vec3 newPosition = position + normal * sin(time + position.x * 30.0) * cos(time + position.y * 20.0) * 0.3;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+        }
+      `,
+      fragmentShader: `
+        varying vec3 vUv;
+        uniform float time;
 
-  void main() {
-    float r = sin(vUv.x * 6.0 + time * 2.0) * 0.5 + 0.5;
-    float g = cos(vUv.y * 6.0 + time * 3.0 + 2.0) * 0.5 + 0.5;
-    float b = sin(vUv.z * 6.0 + time * 4.0 + 4.0) * 0.5 + 0.5;
-    gl_FragColor = vec4(r, g, b, 1.0);
-  }
-`,
-
+        void main() {
+          float r = sin(vUv.x * 6.0 + time * 2.0) * 0.5 + 0.5;
+          float g = cos(vUv.y * 6.0 + time * 3.0 + 2.0) * 0.5 + 0.5;
+          float b = sin(vUv.z * 6.0 + time * 4.0 + 4.0) * 0.5 + 0.5;
+          gl_FragColor = vec4(r, g, b, 1.0);
+        }
+      `,
     });
 
     const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
@@ -70,10 +70,14 @@ fragmentShader: `
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
       raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObjects([sphere]);
+      const intersects = raycaster.intersectObjects([sphere, cube]);
+
       if (intersects.length > 0) {
-        if (props.onBlobClick) {
+        const clickedObject = intersects[0].object;
+        if (clickedObject === sphere && props.onBlobClick) {
           props.onBlobClick();
+        } else if (clickedObject === cube) {
+          sound.play();
         }
       }
     };
@@ -112,6 +116,7 @@ fragmentShader: `
 };
 
 export default ThreeSphere;
+
 
 
 
