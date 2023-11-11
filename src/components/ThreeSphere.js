@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Vector2, Raycaster } from 'three';
 import caronImage from '../assets/images/caron.png';
-// import soundFile from '../assets/sounds/crayon.m4a'; // Make sure the path to your sound file is correct
+// import soundFile from '../assets/sounds/crayon.m4a'; 
 
 const ThreeSphere = (props) => {
   const { onBlobClick } = props; // Destructure the onBlobClick prop
@@ -35,7 +35,7 @@ const ThreeSphere = (props) => {
       void main() {
         vUv = position;
         float pulseFactor = sin(time + length(position)) * 12.2; // For a pulsating effect
-        vec3 newPosition = position + normal * (sin(time * 2.0 + position.x * 20.0) * cos(time * 2.0 + position.y * 15.0) + pulseFactor);
+        vec3 newPosition = position + normal * (sin(time * 20.0 + position.x * 20.0) * cos(time * 2.0 + position.y * 15.0) + pulseFactor);
         gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
       }
       
@@ -45,15 +45,15 @@ const ThreeSphere = (props) => {
       uniform float time;
       
       void main() {
-        float r = sin(vUv.x * 2.0 + time * 3.0) * 0.5 + 0.5;
-        float g = cos(vUv.y * 7.0 + time * 4.0 + 3.0) * 0.5 + 0.5;
+        float r = sin(vUv.x * 3.0 + time * 3.0) * 0.5 + 0.5;
+        float g = cos(vUv.y * 7.0 + time * 4.0 + 13.0) * 0.5 + 0.5;
         float b = sin(vUv.z * 1.0 + time * 5.0 + 6.0) * 0.5 + 0.5;
         gl_FragColor = vec4(r, g, b, 1.0);
       }
       
       `,
     });
-//trigonometric functions to generate colors between 0.5 and 1 for red, green, and blue channels. To use a different gradient, you could add offsets or multipliers to these channels.
+//trigonometric functions to generpate colors between 0.5 and 1 for red, green, and blue channels. To use a different gradient, you could add offsets or multipliers to these channels.
     const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
     const sphere = new THREE.Mesh(sphereGeometry, material);
     scene.add(sphere);
@@ -76,17 +76,16 @@ const ThreeSphere = (props) => {
       raycaster.setFromCamera(mouse, camera);
     
       const intersects = raycaster.intersectObjects([sphere, cube]);
-      console.log("Intersected object test:", intersects); 
+      // console.log("Intersected object test:", intersects); 
     
       if (intersects.length > 0) {
         for (let i = 0; i < intersects.length; i++) {
           const clickedObject = intersects[i].object;
 
           if (clickedObject === cube) {
-            // sound.play().catch(error => console.log("Playback error:", error));
             break;
-          } else if (clickedObject === sphere) { // Sphere clicked
-            onBlobClick(); // Call the function to show Linktree
+          } else if (clickedObject === sphere) { 
+            onBlobClick(); // Call the function to show Linktree (update so there is an onclick when hovering)
             break;
           }
         }
