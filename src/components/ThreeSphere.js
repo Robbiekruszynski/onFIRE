@@ -34,8 +34,8 @@ const ThreeSphere = (props) => {
       
       void main() {
         vUv = position;
-        float pulseFactor = sin(time + length(position)) * 12.2; // For a pulsating effect
-        vec3 newPosition = position + normal * (sin(time * 20.0 + position.x * 20.0) * cos(time * 2.0 + position.y * 15.0) + pulseFactor);
+        float pulseFactor = sin(time + length(position)) * 20.2; // For a pulsating effect
+        vec3 newPosition = position + normal * (sin(time * 20.0 + position.x * 20.0) * cos(time * 2.0 + position.y * 15.0) + pulseFactor); //adjustments for sphere roation speed
         gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
       }
       
@@ -85,7 +85,7 @@ const ThreeSphere = (props) => {
           if (clickedObject === cube) {
             break;
           } else if (clickedObject === sphere) { 
-            onBlobClick(); // Call the function to show Linktree (update so there is an onclick when hovering)
+            onBlobClick(); // Call the function to show Linktree (update this so there is an onclick when hovering)
             break;
           }
         }
