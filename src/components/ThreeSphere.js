@@ -3,12 +3,10 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Vector2, Raycaster } from 'three';
 import caronImage from '../assets/images/caron.png';
-// import soundFile from '../assets/sounds/crayon.m4a'; 
 
 const ThreeSphere = (props) => {
-  const { onBlobClick } = props; // Destructure the onBlobClick prop
+  const { onBlobClick } = props;
   const canvasRef = useRef(null);
-  // const sound = new Audio(soundFile); // Initialize audio
 
   useEffect(() => {
     let time = 0;
@@ -34,11 +32,15 @@ const ThreeSphere = (props) => {
       
       void main() {
         vUv = position;
-        float pulseFactor = sin(time + length(position)) * 20.2; // For a pulsating effect
-        vec3 newPosition = position + normal * (sin(time * 20.0 + position.x * 20.0) * cos(time * 2.0 + position.y * 15.0) + pulseFactor); //adjustments for sphere roation speed
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+        
+        // Calculate noise based displacement
+        float displacement = sin(position.x * 2.0 + time) * cos(position.y * 15.0 + time) * 0.2;
+        
+        // Apply the displacement
+        vec3 newPosition = position + normal * displacement;
+        
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, .10);
       }
-      
       `,
       fragmentShader: `
       varying vec3 vUv;
@@ -50,9 +52,27 @@ const ThreeSphere = (props) => {
         float b = sin(vUv.z * 1.0 + time * 5.0 + 6.0) * 0.5 + 0.5;
         gl_FragColor = vec4(r, g, b, 1.0);
       }
-      
       `,
     });
+    
+    const checkHover = (event) => {
+      event.preventDefault();
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+
+      const intersects = raycaster.intersectObject(sphere);
+
+      if (intersects.length > 0) {
+        document.body.style.cursor = 'pointer';
+      } else {
+        document.body.style.cursor = 'default';
+      }
+    };
+
+    window.addEventListener('mousemove', checkHover);
+
+
 //trigonometric functions to generpate colors between 0.5 and 1 for red, green, and blue channels. To use a different gradient, you could add offsets or multipliers to these channels.
     const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
     const sphere = new THREE.Mesh(sphereGeometry, material);
@@ -118,8 +138,9 @@ const ThreeSphere = (props) => {
 
     animate();
 
-    return () => {
+      return () => {
       window.removeEventListener('click', onClick);
+      window.removeEventListener('mousemove', checkHover);
     };
   }, [onBlobClick, props]);
 
