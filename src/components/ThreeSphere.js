@@ -34,7 +34,7 @@ const ThreeSphere = (props) => {
         vUv = position;
         
         // Calculate noise based displacement
-        float displacement = sin(position.x * 2.0 + time) * cos(position.y * 150.0 + time) * 1.2;
+        float displacement = sin(position.x * 2.0 + time) * cos(position.y * 10.0 + time) * 1.2;
         
         // Apply the displacement
         vec3 newPosition = position + normal * displacement;
