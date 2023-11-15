@@ -34,12 +34,12 @@ const ThreeSphere = (props) => {
         vUv = position;
         
         // Calculate noise based displacement
-        float displacement = sin(position.x * 2.0 + time) * cos(position.y * 15.0 + time) * 0.2;
+        float displacement = sin(position.x * 2.0 + time) * cos(position.y * 150.0 + time) * 1.2;
         
         // Apply the displacement
         vec3 newPosition = position + normal * displacement;
         
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, .10);
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, .18);
       }
       `,
       fragmentShader: `
@@ -47,12 +47,14 @@ const ThreeSphere = (props) => {
       uniform float time;
       
       void main() {
-        float r = sin(vUv.x * 3.0 + time * 3.0) * 0.5 + 0.5;
-        float g = cos(vUv.y * 7.0 + time * 4.0 + 13.0) * 0.5 + 0.5;
-        float b = sin(vUv.z * 1.0 + time * 5.0 + 6.0) * 0.5 + 0.5;
+        float r = sin(vUv.x * 2.0 + time) * 0.3 + 0.3;  // Reduce the intensity of red
+        float g = cos(vUv.y * 4.0 + time + 1.0) * 0.5 + 0.5;  // Increase green slightly
+        float b = sin(vUv.z * 6.0 + time + 2.0) * 0.5 + 0.7;  // Higher intensity of blue
+    
         gl_FragColor = vec4(r, g, b, 1.0);
       }
-      `,
+    `,
+    
     });
     
     const checkHover = (event) => {
@@ -105,7 +107,7 @@ const ThreeSphere = (props) => {
           if (clickedObject === cube) {
             break;
           } else if (clickedObject === sphere) { 
-            onBlobClick(); // Call the function to show Linktree (update this so there is an onclick when hovering)
+            onBlobClick(); 
             break;
           }
         }
